@@ -1,0 +1,151 @@
+:root{
+    --red : rgb(236, 0, 0);
+    --dark : rgb(14, 14, 14);
+    --grey : rgb(53, 53, 53);
+    --white : rgb(252, 252, 252);
+    --paige : #FAF6E9 ;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    
+}
+
+
+#top_bar{
+    background-color: var(--white);
+    border-bottom-color: var(--grey);
+    border-bottom-width: 1px;
+    border-bottom-style:solid;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    /*box-shadow: 0 0 50vh var(--red);*/
+}
+
+
+.custom_card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px ;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.253);
+    margin-top: 100px;
+    background-color: rgba(255, 255, 255, 0.473); 
+    backdrop-filter: blur(8px);
+    padding: 10px 10px;
+    z-index: 5;
+    width: 90%;
+    max-width: 800px;
+}
+.custom_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+    gap: 10px;
+}
+.custom_input{
+    border-radius: 12px ;
+    padding: 2px 4px;
+    border : rgb(79, 79, 79) 1px solid
+}
+.image_card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    position: fixed;
+    bottom: 5vh;
+    box-shadow: 0 0px 10px #f4f2f3;
+    width: 100%;
+    max-width: 1800px;
+}
+.main_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.upper_title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem; /* space between text and lines */
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.upper_title .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #333; /* or any color you want */
+    opacity: 0.7;
+}
+
+.card:nth-child(2){
+    margin-top: 68px;
+}
+.custom_btn{
+    background: linear-gradient(100deg,var(--red),rgb(255, 140, 140));
+    color: var(--white);
+    border-radius: 10px ;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.016);
+    padding: 5px 10px;
+    font-size: 20px;
+    cursor: pointer; 
+    transition:0.3s ease-in-out;
+    border: 2px solid var(--dark);
+    text-align: center;
+    position: relative;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.custom_btn:hover{
+    box-shadow: 0 0 10px rgba(255, 79, 79, 0.866);
+    color: var(--dark);
+    
+}
+.custom_img {
+    position: fixed;
+    top: 0;
+    left: 50vw;
+    height: 95vh;
+    translate: -50% 0%;
+    width: auto;
+    z-index: -2; /* Put below overlays */
+    object-fit: cover;
+    pointer-events: none;
+}
+.blur_side {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 15vw;
+    z-index: -1;
+    pointer-events: none;
+    backdrop-filter: blur(12px); /* This creates real blur */
+}
+
+.bottom_bar{
+    background: var(--grey);
+    position: fixed;
+    left: -50%;
+    translate: 50% 95vh;
+    width: 100vw;
+    height: 5vh;
+    border-top: 2px solid rgb(241, 241, 241);
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.price_card{
+    display: flex;
+    gap: 20px;
+}
+.custom_label{
+    font-size: 24px;
+}

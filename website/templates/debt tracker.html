@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'style.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&family=Rubik+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Jood Al-rafidian</title>
+</head>
+<body  style="height: 100vh;       
+    overflow: hidden;">
+
+    <nav id="top_bar" class="navbar fixed-top d-flex justify-content-between align-items-center px-3">
+        <i class="fa-solid fa-list hover-effect" style="color: var(--grey);"></i>
+        <img src="{{ url_for('static', filename='imgs/nav_logo.jpg') }}" alt="jood al rafidian" class="img-fluid" style="height: 35px;">
+        <a href="/" class="hover-effect">
+            <i class="fa-solid fa-house" style="color: var(--grey);"></i>
+        </a>
+    </nav>
+    <div class="container-fluid main_container">
+        
+            <!--<img src="{{url_for('static',filename='imgs/house_preview.png')}}" class="custom_img">-->
+
+
+        <div class="custom_card">
+    
+            <div class="upper_title">
+              <div class="line"></div>
+              <span>الحساب التراكمي</span>
+              <div class="line"></div>
+            </div>
+            <h3>الديون : {{ "{:,}".format(depts) }} IQD</h3>
+            <!--<h5 style="color: rgb(139, 139, 139);">المدفوع : {{ "{:,}".format(paid) }} IQD</h5>
+            
+            {% for item in prev_items %}
+                <h6 style="color: rgb(72, 72, 72);" >{{item.name}} : {{ "{:,}".format(item.price)}}</h6>
+            {% endfor %}
+
+            {% for item in range(3) %}
+                <h6 style="color: rgb(117, 117, 117);line-height: 0.1; " >.</h6>
+            {% endfor %}-->
+            
+            <a href="/financial-info" class="custom_btn">عرض الكل</a>
+        
+
+        </div>
+
+        <div class="image_card">
+            <img src="{{url_for('static',filename='imgs/house_preview_test.png')}}" style="width : 100% ">
+        </div>
+
+        <div class="bottom_bar"dir="ltr">
+            <a href="/" class="hover-effect">
+            <i class="fa-solid fa-arrow-left" style="color: var(--white);"></i>
+            </a>
+        </div>
+    </div>
+    
+</body>
+</html>
