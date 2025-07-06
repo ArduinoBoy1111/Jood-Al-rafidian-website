@@ -1,7 +1,10 @@
 from flask import Flask, Blueprint, render_template, request
 <<<<<<< HEAD
+<<<<<<< HEAD
 from . import db
 from .models import User, Transaction
+=======
+>>>>>>> f88e617cec8518451e328326facaf907971b4757
 =======
 >>>>>>> f88e617cec8518451e328326facaf907971b4757
 
@@ -10,10 +13,13 @@ views = Blueprint("views", __name__)
 depts = 3000000
 paid = 2500000
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 @views.route("/", methods=["GET"])
 =======
+=======
+>>>>>>> f88e617cec8518451e328326facaf907971b4757
 prev_items = [
     {"name": "سمنت", "price": 150000},
     {"name": "لبخ", "price": 125000},
@@ -21,11 +27,15 @@ prev_items = [
 
 
 @views.route("/")
+<<<<<<< HEAD
+>>>>>>> f88e617cec8518451e328326facaf907971b4757
+=======
 >>>>>>> f88e617cec8518451e328326facaf907971b4757
 def home():
     return render_template("index.html")
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 @views.route("/debt-tracker")
 def dept_tracker():
@@ -51,9 +61,14 @@ def admin_page():
                 pass
     return render_template("admin login.html")
 =======
+=======
+>>>>>>> f88e617cec8518451e328326facaf907971b4757
 @views.route("/dept-tracker")
 def dept_tracker():
     return render_template(
         "debt tracker.html", depts=depts, paid=paid, prev_items=prev_items
     )
+<<<<<<< HEAD
+>>>>>>> f88e617cec8518451e328326facaf907971b4757
+=======
 >>>>>>> f88e617cec8518451e328326facaf907971b4757

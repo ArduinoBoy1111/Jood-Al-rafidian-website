@@ -9,7 +9,12 @@ html, body {
     margin: 0;
     padding: 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
     
+=======
+    height: 100vh;       /* lock the layout to one viewport height */
+    overflow: hidden;    /* clip any overflow, no scrollbars */
+>>>>>>> f88e617cec8518451e328326facaf907971b4757
 =======
     height: 100vh;       /* lock the layout to one viewport height */
     overflow: hidden;    /* clip any overflow, no scrollbars */
@@ -24,7 +29,11 @@ html, body {
     border-bottom-style:solid;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 <<<<<<< HEAD
+<<<<<<< HEAD
     /*box-shadow: 0 0 50vh var(--red);*/
+=======
+    box-shadow: 0 0 50vh var(--red);
+>>>>>>> f88e617cec8518451e328326facaf907971b4757
 =======
     box-shadow: 0 0 50vh var(--red);
 >>>>>>> f88e617cec8518451e328326facaf907971b4757
@@ -37,6 +46,7 @@ html, body {
     justify-content: center;
     align-items: center;
     border-radius: 12px ;
+<<<<<<< HEAD
 <<<<<<< HEAD
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.253);
     margin-top: 100px;
@@ -60,6 +70,8 @@ html, body {
     padding: 2px 4px;
     border : rgb(79, 79, 79) 1px solid
 =======
+=======
+>>>>>>> f88e617cec8518451e328326facaf907971b4757
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
     margin-top: 100px;
     background-color: rgba(255, 255, 255, 0.473); 
@@ -67,6 +79,9 @@ html, body {
     scale: 115%;
     padding: 10px 50px;
     z-index: 5;
+<<<<<<< HEAD
+>>>>>>> f88e617cec8518451e328326facaf907971b4757
+=======
 >>>>>>> f88e617cec8518451e328326facaf907971b4757
 }
 .image_card{
@@ -112,7 +127,11 @@ html, body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.016);
     padding: 5px 10px;
 <<<<<<< HEAD
+<<<<<<< HEAD
     font-size: 20px;
+=======
+    font-size: 16px;
+>>>>>>> f88e617cec8518451e328326facaf907971b4757
 =======
     font-size: 16px;
 >>>>>>> f88e617cec8518451e328326facaf907971b4757
@@ -123,7 +142,10 @@ html, body {
     position: relative;
     margin-top: 10px;
 <<<<<<< HEAD
+<<<<<<< HEAD
     text-decoration: none;
+=======
+>>>>>>> f88e617cec8518451e328326facaf907971b4757
 =======
 >>>>>>> f88e617cec8518451e328326facaf907971b4757
 }
@@ -168,6 +190,7 @@ html, body {
     align-items: center;
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 .price_card{
     display: flex;
@@ -175,6 +198,8 @@ html, body {
 }
 .custom_label{
     font-size: 24px;
+=======
+>>>>>>> f88e617cec8518451e328326facaf907971b4757
 =======
 >>>>>>> f88e617cec8518451e328326facaf907971b4757
 }
