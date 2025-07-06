@@ -102,6 +102,7 @@ html, body {
     text-align: center;
     position: relative;
     margin-top: 10px;
+    text-decoration: none;
 }
 
 .custom_btn:hover {
