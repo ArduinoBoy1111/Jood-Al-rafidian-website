@@ -139,7 +139,7 @@ html, body {
     translate: 50% 95vh;
     width: 100vw;
     height: 5vh;
-    border-top: 2px solid rgb(241, 241, 241);
+
     display: flex;
     padding: 10px;
     justify-content: space-between;
