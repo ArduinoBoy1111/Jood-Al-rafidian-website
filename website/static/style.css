@@ -9,8 +9,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    overflow: hidden;
+    
 }
 
 #top_bar {
@@ -31,7 +30,7 @@ html, body {
     backdrop-filter: blur(8px);
     padding: 10px 10px;
     z-index: 5;
-    width: 90%;
+    width: 96%;
     max-width: 800px;
 }
 
@@ -75,7 +74,7 @@ html, body {
     gap: 1rem;
     width: 100%;
     padding: 10px;
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .upper_title .line {
@@ -133,24 +132,83 @@ html, body {
 }
 
 .bottom_bar {
-    background: var(--grey);
     position: fixed;
-    left: -50%;
-    translate: 50% 95vh;
-    width: 100vw;
-    height: 5vh;
-
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5vh;  /* or fixed flike 60px */
+    z-index: 100;
     display: flex;
     padding: 10px;
     justify-content: space-between;
     align-items: center;
+    background: var(--grey);
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
 }
 
-.price_card {
-    display: flex;
-    gap: 20px;
+.price_table {
+    border-collapse: collapse;
+    margin: 5px 0px;
+    font-size: 0.9em;
+    width: 100%;
+    table-layout: fixed;
+    direction: rtl; /* for Arabic layout */
+    margin-bottom: 20px;
+}
+.table_year_label {
+    background-color: rgba(255, 79, 79, 0.25);
+    color: #333;
+    padding: 0 30px;
+    font-weight: bold;
+    font-size: 0.95em;
+    display: inline;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+.price_table thead tr {
+    background-color: rgba(255, 79, 79, 0.294);
+    text-align: right;
+    font-weight: bold;
+    border-top: 1px solid var(--grey);
+    border-right: 1px solid var(--grey);
+    border-left: 1px solid var(--grey);
 }
 
+.price_table th, .price_table td {
+    padding: 8px 10px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    vertical-align: top;
+}
+
+.price_table tbody tr {
+    border: 1px solid var(--grey);
+}
+
+.price_table tbody tr:nth-of-type(even) {
+    background-color: rgb(243, 243, 243);
+}
+
+/* Column-specific control */
+.name_col {
+    
+    white-space: normal; /* allows wrapping */
+}
+
+.price_col,
+.date_col {
+    
+    white-space: nowrap; /* keeps text on one line */
+    text-align: center;
+    border-right: 1px var(--grey) solid;
+    text-align: center;
+}
+.price_col{
+    width: 95px;
+}
+.date_col{
+    width: 60px;
+}
 .custom_label {
     font-size: 24px;
 }

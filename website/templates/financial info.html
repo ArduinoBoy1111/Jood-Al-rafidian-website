@@ -25,41 +25,88 @@
 
             <div class="upper_title">
               <div class="line"></div>
-              <span>الديون</span>
+              <span>{{house_name}}</span>
               <div class="line"></div>
             </div>
-            <ol>
+            <h6>للفترة من {{transactions[-1].date}} إلى {{transactions[0].date}}</h6>
 
-                {% for debt in debts %}
-                    <li>
-                        <div class="price_card">
-                        <h1>{{debt.name}}</h1>
-                        <h1>{{debt.price}}</h1>
-                        <h1>{{debt.date}}</h1>
-                    </div>
-                    </li>
-                    
-                {% endfor %}
-                
-            </ol>
             
+            <table class="price_table">
+                <thead>
+                    <form method="get">
+                        <tr>
+                            <th class="name_col">الاسم</th>
+                            <th class="price_col">
+                                <div style="display: flex; flex-direction: column; align-items: center; width: 95px; translate: 10px 0 ;">
+                                    المبلغ
+                                    <select name="price_tag" onchange="this.form.submit()" 
+                                            style="width: 55px; border-radius: 10px; border: rgb(0, 0, 0) 1px solid; margin-top: 5px;">
+                                        <option value="all">الكل</option>
+                                        <option value="debt" {% if selected_price_tag == 'debt' %}selected{% endif %}>مدين</option>
+                                        <option value="payment" {% if selected_price_tag == 'payment' %}selected{% endif %}>دائن</option>
+                                    </select>
+                                </div>
+                            </th>
+                        
+                            <th class="date_col">
+                                <div style="display: flex; flex-direction: column; align-items: center; width: 60px;translate: 10px 0 ;">
+                                    التاريخ
+                                    <select name="year" onchange="this.form.submit()" 
+                                            style="width: 55px; border-radius: 10px; border: rgb(0, 0, 0) 1px solid; margin-top: 5px;">
+                                        <option value="all">الكل</option>
+                                        {% for year in years %}
+                                            <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </th>
+                        </tr>
+                    </form>
+
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                        {% if selected_year=="all" or transaction.date[:4]==selected_year%}
+                            {% if (selected_price_tag=="all" or selected_price_tag=="payment") and  not transaction.debt %}
+                                <tr style="background-color: rgb(170, 255, 170);">
+                                    <td class="name_col">
+                                        {{transaction.name}}
+                                    </td>
+                                    <td class="price_col">
+                                        {{transaction.price}}
+                                    </td>
+                                    <td class="date_col">
+                                        {{transaction.date[5:].replace("-","/")}}
+                                    </td>
+                                </tr>
+                            {% elif (selected_price_tag=="all" or selected_price_tag=="debt") and  transaction.debt %}
+                                <tr >
+                                    <td class="name_col">
+                                        {{transaction.name}}
+                                    </td>
+                                    <td class="price_col">
+                                        {{transaction.price}}
+                                    </td>
+                                    <td class="date_col">
+                                        {{transaction.date[5:].replace("-","/")}}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <div class="custom_card">
-
-            <div class="upper_title">
-              <div class="line"></div>
-              <span>المبالغ المدفوعة</span>
-              <div class="line"></div>
+        
+        <div class="bottom_bar"dir="ltr">
+            <a href="javascript:history.back()" class="hover-effect">
+            <i class="fa-solid fa-arrow-left" style="color: var(--white);"></i>
+            </a>
+            <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;gap: 4px;padding-right: 4px;">
+                <h4 style="color: white; padding: 4px;">{{name}}</h4>
+                <i class="fa-solid fa-user" style="color: #ffffff; scale: 140%;"></i>
             </div>
-
-            {% for payment in payments %}
-                <div class="price_card">
-                    <h1>{{payment}}</h1>
-                </div>
-            {% endfor %}
-
         </div>
     </div>
-    
 </body>
 </html>

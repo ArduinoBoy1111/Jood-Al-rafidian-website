@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
+from datetime import timedelta
+
 
 db = SQLAlchemy()
 
@@ -14,7 +16,7 @@ def create_app():
         app.instance_path, "app.db"
     )
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
+    app.permanent_session_lifetime = timedelta(weeks=260)
     # Initialize extensions
     db.init_app(app)
 

@@ -21,13 +21,24 @@
     <div class="container-fluid main_container">
 
         <div class="custom_card">
-            <a href="/user-login" class="custom_btn" style="margin-top: 120px;">تفقد بيتي</a>
-        </div>
-        
-        <div class="custom_card">
-            <a href="/admin-login" class="custom_btn" style="margin-top: 120px;">تسجيل الدخول كمحاسب</a>
+            <a href="{{ url_for('views.debt_tracker') }}" class="custom_btn" style="margin-top: 120px;">تفقد بيتي</a>
         </div>
 
+        <div class="custom_card">
+            <a href="{{ url_for('views.admin_login') }}" class="custom_btn" style="margin-top: 120px;">تسجيل الدخول كمحاسب</a>
+        </div>
+
+        <div class="custom_card">
+            <a href="{{ url_for('views.logout') }}" class="custom_btn">تسجيل الخروج</a>
+        </div>
+
+
+        <div class="bottom_bar"dir="rtl">
+            <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;gap: 4px;padding-right: 4px;">
+                <i class="fa-solid fa-user" style="color: #ffffff; scale: 140%;"></i>
+                <h4 style="color: white; padding: 4px;">{{name}}</h4>
+            </div>
+        </div>
     </div>
     
 </body>
