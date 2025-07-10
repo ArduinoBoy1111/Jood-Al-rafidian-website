@@ -1,6 +1,7 @@
-from flask import Flask, Blueprint, render_template, request, redirect, session, url_for
+from flask import flash, Blueprint, render_template, request, redirect, session, url_for
 from . import db
 from .models import User, Transaction
+from sqlalchemy.exc import IntegrityError
 
 views = Blueprint("views", __name__)
 
@@ -108,24 +109,56 @@ def user_login():
         return render_template("user login.html")
 
 
-@views.route("/admin-dashboard")
+@views.route("/admin-dashboard", methods=["GET", "POST"])
 def admin_dashboard():
-    username = session.get("username", "مجهول")
-    if session["admin"]:
-        return render_template("admin dashboard.html", name=username)
-
-    else:
+    if not session.get("admin"):
         return redirect("/admin-login")
+
+    username = session.get("username", "مجهول")
+
+    if request.method == "POST":
+        name = request.form.get("name")
+        code = request.form.get("code")
+        project_name = request.form.get("project_name")
+
+        if name and code and project_name:
+            new_user = User(
+                name=name, code=code, project_name=project_name, admin=False
+            )
+            db.session.add(new_user)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
+                flash("⚠️ الرمز مستخدم مسبقًا. الرجاء اختيار رمز آخر.", "error")
+                return redirect(url_for("views.admin_dashboard"))
+
+    users = User.query.all()
+    return render_template("admin dashboard.html", name=username, users=users)
+
+
+@views.route("/rm-user", methods=["POST", "GET"])
+def rm_user():
+    user_id = request.form.get("user")
+    user = User.query.get(user_id)
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+    return redirect(url_for("views.admin_dashboard"))
+
+
+@views.route("/user-info-<userid>")
+def user_info(userid):
+    if not session.get("admin"):
+        return redirect("/admin-login")
+
+    user = User.query.filter_by(id=userid).first()
+    if not user:
+        return "المستخدم غير موجود", 404
+    return render_template("user_info.html", user=user)
 
 
 @views.route("/logout")
 def logout():
     session.clear()
     return redirect("/")
-
-
-def add_no_cache(response):
-    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, private"
-    response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "0"
-    return response

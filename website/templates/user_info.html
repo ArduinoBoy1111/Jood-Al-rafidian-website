@@ -24,30 +24,10 @@
 
         <div class="custom_card">
             <div style="display: flex; width: 96%;">
-                <button class="add_button" onclick="openForm()">
-                    <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+                <button class="add_button" style="padding: 10px 15px;"onclick="openForm()">
+                    <i class="fa-solid fa-plus" style="color: #ffffff;scale: 140%;"></i>
                 </button>
             </div>
-            {% for user in users %}
-                {% if not user.admin %}
-                    <div class="user_row">
-                        <div style="display: flex; justify-content: space-between; width: 50%; text-align: center;">
-                            <h4 style="padding-right: 3px; padding:5px  ;">{{user.name}}</h4>
-                            
-                            <h4 style="border-right: 1px rgba(128, 128, 128, 0.56) solid;padding-right: 3px; padding:5px  ;">{{user.code}}</h4>
-                        </div>
-                        <div>
-                            <a href="{{ url_for('views.user_info', userid=user.id) }}" style="text-decoration: none;">
-                                <button class="edit_button">تعديل</button>
-                            </a>
-                            <button onclick="openwarning({{ user.id }}, '{{ user.name }}')" class="delete_button">حذف</button>
-                        </div>
-                        
-                        
-                    </div>
-                    
-                {% endif %}
-            {% endfor %}
         </div>
         
         <div id="addUserForm" >

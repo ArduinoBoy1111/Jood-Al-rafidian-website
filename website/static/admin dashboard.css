@@ -1,0 +1,142 @@
+.user_row{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 98%;
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    border-radius: 15px;
+    padding: 6px 8px;
+    margin-top: 8px;
+    box-shadow: 0 2px rgba(128, 128, 128, 0.5);
+    scale: 100%;
+    transition: 0.3s ease-in-out;
+}
+.edit_button{
+    border-radius: 12px;
+    background: rgb(92, 92, 255);
+    color: white;
+    text-align: center;
+    border: 2px solid rgb(36, 36, 36);
+    box-shadow: 0 3px 5px rgb(128, 128, 128);
+    transition: 0.3s ease-in-out;
+    scale: 100%;
+}
+.delete_button{
+    border-radius: 12px;
+    background: rgb(255, 92, 92);
+    color: white;
+    text-align: center;
+    border: 2px solid rgb(36, 36, 36);
+    box-shadow: 0 3px 5px rgb(128, 128, 128);
+    transition: 0.3s ease-in-out;
+    scale: 100%;
+}
+.custom_admin_button{
+    border-radius: 12px;
+    background: rgb(215, 215, 215);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    border: 2px solid rgb(36, 36, 36);
+    box-shadow: 0 3px 4px rgb(128, 128, 128);
+    transition: 0.3s ease-in-out;
+    scale: 100%;
+    text-align: center;
+    padding: 4px 5px;
+    margin: 5px;
+}
+.custom_admin_button1{
+    border-radius: 12px;
+    background: rgb(215, 215, 215);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    border: 2px solid rgb(36, 36, 36);
+    box-shadow: 0 3px 4px rgb(128, 128, 128);
+    transition: 0.3s ease-in-out;
+    scale: 100%;
+    text-align: center;
+    padding: 4px 5px;
+    margin: 5px;
+}
+.delete_button:hover,
+.edit_button:hover,
+.add_button:hover,
+.custom_admin_button:hover{
+    scale: 110%;
+    transition: 0.3s ease-in-out;
+}
+.custom_admin_button1:hover{
+    scale: 110%;
+    transition: 0.3s ease-in-out;
+    background-color: rgb(192, 192, 192);
+}
+.custom_admin_button:first-of-type:hover{
+    scale: 110%;
+    transition: 0.3s ease-in-out;
+    background-color: rgb(53, 255, 53);
+}
+.custom_admin_button:last-of-type:hover{
+    scale: 110%;
+    transition: 0.3s ease-in-out;
+    background-color: rgb(255, 53, 53);
+}
+.user_row:hover{
+    scale: 102%;
+    transition: 0.3s ease-in-out;
+    background-color: rgb(246, 246, 246);
+}
+.add_button{
+    border-radius: 14px;
+    background: rgb(92, 255, 92);
+    color: white;
+    text-align: center;
+    border: 2px solid rgb(36, 36, 36);
+    box-shadow: 0 3px 5px rgb(128, 128, 128);
+    transition: 0.3s ease-in-out;
+    scale: 100%;
+    padding: 10px 10px;
+}
+#addUserForm{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background: white; 
+    padding: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    z-index: 1000; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    text-align: center;
+    width: 450px;
+}
+.warning_card{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background: white; 
+    padding: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    z-index: 1000; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    text-align: center;
+    width: 450px;
+}
+
+.alert-error {
+    background-color: #ffdddd;
+    color: #a33;
+    padding: 10px;
+    border: 1px solid #a33;
+    margin: 10px 0;
+    border-radius: 8px;
+}
