@@ -1,7 +1,18 @@
-from flask import flash, Blueprint, render_template, request, redirect, session, url_for
+from flask import (
+    flash,
+    Blueprint,
+    render_template,
+    request,
+    redirect,
+    session,
+    url_for,
+    current_app,
+)
 from . import db
 from .models import User, Transaction
 from sqlalchemy.exc import IntegrityError
+from werkzeug.utils import secure_filename
+import os
 
 views = Blueprint("views", __name__)
 
@@ -49,7 +60,7 @@ def financial_info():
         transactions = list(reversed_transactions)
 
         years = sorted({t.date[:4] for t in transactions}, reverse=True)
-        house_name = "مشورع الوفاء 1"  # this is temporary ...
+        house_name = user.project_name
         return render_template(
             "financial info.html",
             transactions=transactions,
@@ -147,15 +158,66 @@ def rm_user():
     return redirect(url_for("views.admin_dashboard"))
 
 
-@views.route("/user-info-<userid>")
+@views.route("/user-info-<userid>", methods=["GET", "POST"])
 def user_info(userid):
+    username = session.get("username", "مجهول")
+
+    selected_price_tag = request.args.get("price_tag", default="all")
+    selected_year = request.args.get("year", default="all")
+
     if not session.get("admin"):
         return redirect("/admin-login")
 
     user = User.query.filter_by(id=userid).first()
     if not user:
         return "المستخدم غير موجود", 404
-    return render_template("user_info.html", user=user)
+
+    if request.method == "POST":
+        name = request.form.get("name")
+        debt = request.form.get("debt") == "True"
+        price = request.form.get("price")
+        date = request.form.get("date")
+        image = request.files.get("image")
+
+        new_transaction = Transaction(
+            name=name, debt=debt, price=price, date=date, user_id=user.id
+        )
+        db.session.add(new_transaction)
+        db.session.commit()
+
+        if image and image.filename:
+            print("Image received:", image.filename)
+            ext = os.path.splitext(image.filename)[1]
+            last_transaction = (
+                Transaction.query.filter_by(user_id=user.id)
+                .order_by(Transaction.id.desc())
+                .first()
+            )
+            last_id = last_transaction.id if last_transaction else None
+
+            file_name = f"{user.id}_{last_id}{ext}"
+            file_name = secure_filename(file_name)
+            upload_path = os.path.join(
+                current_app.root_path, "static", "uploads", file_name
+            )
+            image.save(upload_path)
+        return redirect(url_for("views.user_info", userid=user.id))
+
+    reversed_transactions = reversed(user.transactions)
+    transactions = list(reversed_transactions)
+
+    years = sorted({t.date[:4] for t in transactions}, reverse=True)
+
+    return render_template(
+        "user_info.html",
+        user=user,
+        transactions=transactions,
+        house_name=user.project_name,
+        name=username,
+        years=years,
+        selected_year=selected_year,
+        selected_price_tag=selected_price_tag,
+    )
 
 
 @views.route("/logout")

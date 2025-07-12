@@ -28,28 +28,133 @@
                     <i class="fa-solid fa-plus" style="color: #ffffff;scale: 140%;"></i>
                 </button>
             </div>
+
+            <div class="upper_title">
+              <div class="line"></div>
+              <span>{{house_name}}</span>
+              <div class="line"></div>
+            </div>
+            {% if transactions %}
+                <h6>للفترة من {{ transactions[-1].date }} إلى {{ transactions[0].date }}</h6>
+            {% else %}
+                <h6>الفترة: غير معرف</h6>
+            {% endif %}
+
+
+            
+            <table class="price_table">
+                <thead>
+                    <form method="get">
+                        <tr>
+                            <th class="name_col">الاسم</th>
+                            <th class="price_col">
+                                <div style="display: flex; flex-direction: column; align-items: center; width: 95px; translate: 10px 0 ;">
+                                    المبلغ
+                                    <select name="price_tag" onchange="this.form.submit()" 
+                                            style="width: 55px; border-radius: 10px; border: rgb(0, 0, 0) 1px solid; margin-top: 5px;">
+                                        <option value="all">الكل</option>
+                                        <option value="debt" {% if selected_price_tag == 'debt' %}selected{% endif %}>مدين</option>
+                                        <option value="payment" {% if selected_price_tag == 'payment' %}selected{% endif %}>دائن</option>
+                                    </select>
+                                </div>
+                            </th>
+                        
+                            <th class="date_col">
+                                <div style="display: flex; flex-direction: column; align-items: center; width: 60px;translate: 10px 0 ;">
+                                    التاريخ
+                                    <select name="year" onchange="this.form.submit()" 
+                                            style="width: 55px; border-radius: 10px; border: rgb(0, 0, 0) 1px solid; margin-top: 5px;">
+                                        <option value="all">الكل</option>
+                                        {% for year in years %}
+                                            <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </th>
+                        </tr>
+                    </form>
+
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                        {% if selected_year=="all" or transaction.date[:4]==selected_year%}
+                            {% if (selected_price_tag=="all" or selected_price_tag=="payment") and  not transaction.debt %}
+                                <tr style="background-color: rgb(170, 255, 170);">
+                                    <td class="name_col">
+                                        {{transaction.name}}
+                                        
+                                    </td>
+                                    <td class="price_col">
+                                        {{transaction.price}}
+                                    </td>
+                                    <td class="date_col">
+                                        {{transaction.date[5:].replace("-","/")}}
+                                    </td>
+                                </tr>
+                            {% elif (selected_price_tag=="all" or selected_price_tag=="debt") and  transaction.debt %}
+                                <tr >
+                                    <td class="name_col">
+                                        {{transaction.name}}
+                                    </td>
+                                    <td class="price_col">
+                                        {{transaction.price}}
+                                    </td>
+                                    <td class="date_col">
+                                        {{transaction.date[5:].replace("-","/")}}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+
         </div>
         
         <div id="addUserForm" >
             
-            <h3>إضافة مستخدم جديد</h3>
-            <form id="addUserForm_form" method="post" style="display: flex; flex-direction: column; gap: 12px;">
+            <h3>إضافة فقرة جديد</h3>
+            <form id="addUserForm_form" method="post" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 12px;">
     
                 <div style="display: flex; align-items: center; gap: 8px;">
-                    <label for="name" style="white-space: nowrap;">الاسم:</label>
+                    <label for="name" style="white-space: nowrap;">الوصف:</label>
                     <input style="flex: 1; border: 1px solid black;" type="text" id="name" name="name" required>
                 </div>
             
                 <div style="display: flex; align-items: center; gap: 8px;">
-                    <label for="code" style="white-space: nowrap;">الرمز:</label>
-                    <input style="flex: 1; border: 1px solid black;" type="text" id="code" name="code" required>
+                    <label for="debt" style="white-space: nowrap;">النوع:</label>
+                    <select name="debt" id="debt"style="border: 1px solid black;" onchange="checkpayementtype(this)">
+                        <option  value="True">مصاريف عمل</option>
+                        <option value="False">سلفة عمل</option>
+                    </select>
                 </div>
-            
+
+                <!--<div id="type_div" style="display: flex; align-items: center; gap: 8px;">
+                    <label for="debt" style="white-space: nowrap;">نوع العمل:</label>
+                    <select name="debt" id="type"style="border: 1px solid black;">
+                        <option  value="True">لبخ</option>
+                        <option value="False">نقل</option>
+                        <option value="False">بناء</option>
+                    </select>
+                </div>-->
+                
+
                 <div style="display: flex; align-items: center; gap: 8px;">
-                    <label for="project_name" style="white-space: nowrap;">اسم المشروع:</label>
-                    <input style="flex: 1; border: 1px solid black;" type="text" id="project_name" name="project_name" required>
+                    <label for="price" style="white-space: nowrap;">المبلغ:</label>
+                    <input style="flex: 1; border: 1px solid black;" type="number" id="price" name="price"  required>
                 </div>
-            
+                
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <label for="date" style="white-space: nowrap;">التاريخ:</label>
+                    <input type="date" id="date" name="date" required style="flex: 1; border: 1px solid black; direction: rtl;">
+                </div>
+                
+                
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <label for="image" style="white-space: nowrap;">ارفاق صورة:</label>
+                    <input type="file" id="image" name="image" accept="image/*" >
+                </div>
+                
                 <div style="display: flex; gap: 10px;">
                     <button class="custom_admin_button" type="submit">إضافة</button>
                     <button class="custom_admin_button" type="button" onclick="closeForm()">إلغاء</button>
@@ -69,16 +174,6 @@
             </div>
         </form>
         
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            <div class="flash_messages">
-              {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">{{ message }}</div>
-              {% endfor %}
-            </div>
-          {% endif %}
-        {% endwith %}
-
 
         <div class="bottom_bar"dir="ltr">
             <a href="javascript:history.back()" class="hover-effect">
@@ -103,17 +198,21 @@ function closeForm() {
 
 }
 
-function openwarning(userId,user) {
-    document.getElementById('warning_card').style.display = 'block';
-    document.getElementById('delete_user_input').value = userId;
-    document.getElementById('warning_label').innerText = `سيتم حذف الزبون  ${user} مع جميع سجلاته من قاعدة البيانات`;
-}
+function checkpayementtype(selectedtype){
+    const value = selectedtype.value
 
-function closewarning() {
-    document.getElementById('warning_card').style.display = 'none';
-    document.getElementById('delete_user_input').value = null;
+    if(value === "False"){
+        document.getElementById("type_div").style.display= 'none'
+    }
+    if(value === "True"){
+        document.getElementById("type_div").style.display= 'flex'
+    }
 }
-
+window.addEventListener('DOMContentLoaded', () => {
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+});
 </script>
 
 </body>

@@ -17,6 +17,7 @@ def create_app():
     )
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.permanent_session_lifetime = timedelta(weeks=260)
+    app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
     # Initialize extensions
     db.init_app(app)
 

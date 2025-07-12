@@ -28,7 +28,11 @@
               <span>{{house_name}}</span>
               <div class="line"></div>
             </div>
-            <h6>للفترة من {{transactions[-1].date}} إلى {{transactions[0].date}}</h6>
+            {% if transactions %}
+                <h6>للفترة من {{ transactions[-1].date }} إلى {{ transactions[0].date }}</h6>
+            {% else %}
+                <h6>الفترة: غير معرف</h6>
+            {% endif %}
 
             
             <table class="price_table">
