@@ -1,1 +1,3 @@
 .venv/
+instance/app.db
+git rm --cached instance/app.db
