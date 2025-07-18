@@ -97,7 +97,7 @@
                                         {{transaction.name}}
                                     </td>
                                     <td class="price_col">
-                                        {{transaction.price}}
+                                        {{ "{:,.0f}".format(transaction.price) }}
                                     </td>
                                     <td class="date_col">
                                         {{transaction.date[5:].replace("-","/")}}
@@ -115,12 +115,7 @@
             
             <h3>إضافة فقرة جديد</h3>
             <form id="addUserForm_form" method="post" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 12px;">
-    
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <label for="name" style="white-space: nowrap;">الوصف:</label>
-                    <input style="flex: 1; border: 1px solid black;" type="text" id="name" name="name" required>
-                </div>
-            
+                
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <label for="debt" style="white-space: nowrap;">النوع:</label>
                     <select name="debt" id="debt"style="border: 1px solid black;" onchange="checkpayementtype(this)">
@@ -129,16 +124,11 @@
                     </select>
                 </div>
 
-                <!--<div id="type_div" style="display: flex; align-items: center; gap: 8px;">
-                    <label for="debt" style="white-space: nowrap;">نوع العمل:</label>
-                    <select name="debt" id="type"style="border: 1px solid black;">
-                        <option  value="True">لبخ</option>
-                        <option value="False">نقل</option>
-                        <option value="False">بناء</option>
-                    </select>
-                </div>-->
-                
-
+                <div id="name_div" style="display: flex; align-items: center; gap: 8px;">
+                    <label for="name_input" style="white-space: nowrap;">الوصف:</label>
+                    <input id="name_input" style="flex: 1; border: 1px solid black;" type="text" name="name" required>
+                </div>
+            
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <label for="price" style="white-space: nowrap;">المبلغ:</label>
                     <input style="flex: 1; border: 1px solid black;" type="number" id="price" name="price"  required>
@@ -156,12 +146,14 @@
                 </div>
                 
                 <div style="display: flex; gap: 10px;">
-                    <button class="custom_admin_button" type="submit">إضافة</button>
+                    <button class="custom_admin_button"  type="submit">إضافة</button>
                     <button class="custom_admin_button" type="button" onclick="closeForm()">إلغاء</button>
                 </div>
             
             </form>
-
+            
+            
+    
         </div>
 
         <form action="{{ url_for('views.rm_user') }}" method="post">
@@ -197,15 +189,17 @@ function closeForm() {
     document.getElementById('addUserForm_form').reset();
 
 }
-
 function checkpayementtype(selectedtype){
     const value = selectedtype.value
 
     if(value === "False"){
-        document.getElementById("type_div").style.display= 'none'
+        document.getElementById("name_div").style.display= 'none'
+        document.getElementById("name_input").value= 'سلفة عمل'
     }
     if(value === "True"){
-        document.getElementById("type_div").style.display= 'flex'
+        document.getElementById("name_div").style.display= 'flex'
+        document.getElementById("name_input").value= ""
+        
     }
 }
 window.addEventListener('DOMContentLoaded', () => {

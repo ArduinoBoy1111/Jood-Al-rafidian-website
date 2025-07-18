@@ -182,7 +182,18 @@ def user_info(userid):
         new_transaction = Transaction(
             name=name, debt=debt, price=price, date=date, user_id=user.id
         )
+        if new_transaction.debt:
+            percent_transaction = Transaction(
+                name=" نسبة الشركة >> " + new_transaction.name,
+                debt=debt,
+                price=float(price) * 0.1,
+                date=date,
+                user_id=user.id,
+            )
+            db.session.add(percent_transaction)
+
         db.session.add(new_transaction)
+
         db.session.commit()
 
         if image and image.filename:
